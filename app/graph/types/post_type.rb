@@ -8,4 +8,11 @@ PostType = GraphQL::ObjectType.define do
   field :body, types.String, "The body of this post"
   field :created_at, types.String, "The time at which this post was created"
   field :user, UserType, "Owner of this post"
+
+  field :url do
+    type types.String
+    resolve -> (obj, args, ctx) {
+      Rails.application.routes.url_helpers.post_path(obj)
+    }
+  end
 end
