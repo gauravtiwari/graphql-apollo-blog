@@ -1,0 +1,38 @@
+{
+  "name": "apollo_on_rails",
+  "version": "1.0.0",
+  "description": "Apollo graphql client with react on rails ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gauravtiwari/apollo_on_rails.git"
+  },
+  "keywords": [
+    "react",
+    "apollo",
+    "graphql",
+    "rails",
+    "ES6"
+  ],
+  "author": "Gaurav Tiwari <gaurav@gauravtiwari.co.uk>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gauravtiwari/apollo_on_rails/issues"
+  },
+  "homepage": "https://github.com/gauravtiwari/apollo_on_rails#readme",
+  "dependencies": {
+    "apollo-client": "0.0.5",
+    "react": "^15.0.1",
+    "react-dom": "^15.0.1"
+  },
+  "devDependencies": {
+    "babel-preset-es2015": "^6.6.0",
+    "babel-preset-react": "^6.5.0",
+    "babelify": "^7.2.0",
+    "browserify": "^13.0.0",
+    "browserify-incremental": "^3.1.1"
+  }
+}
