@@ -1,24 +1,29 @@
-## README
+# Apollo GraphQL client with React, running on Rails powered Graphql server (with server rendering)
+*Note: Apollo (https://github.com/apollostack/apollo-client) is under heavy development.*
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Setup to use new Graphql client: *Apollo* (https://github.com/apollostack/apollo-client) with Rails asset pipeline using `browserify-rails` and `react-rails` gem
 
-Things you may want to cover:
+Check out the `app/assets/javascripts` folder
 
-* Ruby version
+```bash
+components: Contains all react components splitted in directories (same namespace as rails views)
+components.js: components manifest
+```
+## Features
+* React with ES6 syntax
+* Graph Server built on Rails using: `graphql-ruby` gem
+* Graphql client: Apollo (https://github.com/apollostack/apollo-client)
+* Babel transpiler
+* NPM support
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## Running
+```bash
+git clone git@github.com:gauravtiwari/apollo_on_rails.git
+cd apollo_on_rails
+bundle install
+npm install
+chmod 777 start
+./start
+# Or Alternatively
+bundle exec foreman start
+```
