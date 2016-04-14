@@ -2,7 +2,8 @@ class GraphqlController < ApplicationController
   before_action :set_current_user
 
   def create
-    result = RelaySchema.execute(
+    schema = GraphQL::Schema.new(query: QueryType)
+    result = schema.execute(
       params[:query],
       debug: true,
       variables: params[:variables],
