@@ -1,8 +1,13 @@
 Rails.application.routes.draw do
-  resources :posts
+  root to: 'posts#index'
+
   devise_for :users
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  resources :posts
+
+  scope '/graphql' do
+    post "/", to: "graphql#create"
+  end
 
   # Serve websocket cable requests in-process
-  # mount ActionCable.server => '/cable'
+  mount ActionCable.server => '/cable'
 end
