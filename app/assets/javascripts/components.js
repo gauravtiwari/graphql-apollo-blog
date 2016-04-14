@@ -1,8 +1,11 @@
 // ES6 imports
 import PostsIndexComponent from './components/posts/index.es6.js';
-
-// Setup a global app scope
-var app = window.app = global.app = {};
+import $ from 'jquery';
+import App from './app';
+import currentUser from './current_user';
+import Environment from './environment';
 
 // Expose components to global scope
-app.PostsIndexComponent = PostsIndexComponent;
+App.PostsIndexComponent = PostsIndexComponent;
+App.currentUser = currentUser;
+App.Environment = Environment;
