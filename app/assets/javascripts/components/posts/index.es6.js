@@ -6,7 +6,9 @@ import PostsQuery from './query';
 let runApolloTimeout;
 
 const client = new ApolloClient();
-const postsQuery = new PostsQuery({first: 80});
+const postsQuery = new PostsQuery({
+	first: 80,
+});
 
 class PostsIndexComponent extends React.Component {
 	constructor(props) {
@@ -24,13 +26,15 @@ class PostsIndexComponent extends React.Component {
 	componentDidMount() {
 		runApolloTimeout = setTimeout(() => {
 			this.runApolloQuery();
-		}, 10000);
+		}, 3000);
 	}
 
 	runApolloQuery() {
 		const handle = client.query(
 			postsQuery
 		);
+
+		// Listen for promise
 		handle.then((graphQLResult) => {
 		  const { errors, data } = graphQLResult;
 
