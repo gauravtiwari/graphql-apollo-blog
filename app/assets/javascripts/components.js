@@ -5,6 +5,8 @@ import App from './app';
 import currentUser from './current_user';
 import Environment from './environment';
 
+App.setTimeout = null;
+
 // Expose components to global scope
 App.PostsIndexComponent = PostsIndexComponent;
 App.currentUser = currentUser;

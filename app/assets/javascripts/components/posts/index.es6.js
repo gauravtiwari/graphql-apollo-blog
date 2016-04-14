@@ -1,48 +1,44 @@
 import React from 'react';
 import ApolloClient from 'apollo-client';
 import PostPreview from './postPreview';
+import PostsQuery from './query';
+
+let runApolloTimeout;
 
 const client = new ApolloClient();
-
-const handle = client.watchQuery({
-  query: `
-    query getPosts($first: Int!) {
-			posts {
-				id
-				title,
-				body,
-				user {
-					id,
-					name,
-					email
-				}
-			}
-  }
-  `,
-  variables: {
-  	first: 20,
-  },
-  forceFetch: false,
-  returnPartialData: true,
-});
+const postsQuery = new PostsQuery({first: 80});
 
 class PostsIndexComponent extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			posts: []
-		}
-		this.watchQueryResult();
+			posts: props.posts,
+			server: true,
+		};
 	}
 
-	watchQueryResult() {
-		handle.onResult((graphQLResult) => {
+	componentWillUnmount() {
+		clearTimeout(runApolloTimeout);
+	}
+
+	componentDidMount() {
+		runApolloTimeout = setTimeout(() => {
+			this.runApolloQuery();
+		}, 10000);
+	}
+
+	runApolloQuery() {
+		const handle = client.query(
+			postsQuery
+		);
+		handle.then((graphQLResult) => {
 		  const { errors, data } = graphQLResult;
 
 		  if (data) {
 		  	this.setState({
 		  		posts: data.posts,
-		  	})
+		  		server: false
+		  	});
 		  }
 
 		  if (errors) {
@@ -53,11 +49,14 @@ class PostsIndexComponent extends React.Component {
 
 	render() {
 		const postList = this.state.posts.map((post) => {
-			return <PostPreview key={post.id} post={post} />
+			return <PostPreview key={post.id} post={post} />;
 		});
+
+		const text = this.state.server ? 'Loaded from server' : 'Loaded via Graphql'
+
 		return(
 			<div className="postsList">
-				<h1> List of Posts </h1>
+				<h1> List of Posts: {text} </h1>
 				<hr />
 				{postList}
 			</div>
