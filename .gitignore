@@ -21,3 +21,4 @@
 .byebug_history
 node_modules/*
 npm_debug*
+npm-debug*
