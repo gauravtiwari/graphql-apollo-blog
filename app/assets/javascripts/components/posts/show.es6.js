@@ -21,7 +21,10 @@ class PostsShowComponent extends React.Component {
       postPreview = "Loading...";
     } else {
       postPreview = <Card>
-                      <CardTitle title={post.result.post.title} subtitle={post.result.post.user.name} />
+                      <CardTitle
+                        title={post.result.post.title}
+                        subtitle={post.result.post.user.name}
+                      />
                       <CardText>
                         {post.result.post.body}
                       </CardText>
