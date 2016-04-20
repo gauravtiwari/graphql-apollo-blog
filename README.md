@@ -1,7 +1,7 @@
 # Apollo GraphQL client with React, running on Rails powered Graphql server (with server rendering)
 *Note: Apollo (https://github.com/apollostack/apollo-client) is under heavy development.*
 
-Simple setup to use new Graphql client: *Apollo* (https://github.com/apollostack/apollo-client) with Rails asset pipeline using `browserify-rails` and `react-rails` gem
+Simple setup to use new Graphql client: *Apollo* (https://github.com/apollostack/apollo-client) with Rails asset pipeline using `webpack` with a few helpers for dynamic react rendering.
 
 Check out the `app/assets/javascripts` folder
 
