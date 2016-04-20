@@ -1,9 +1,7 @@
 import React from 'react';
 import PostPreview from './postPreview';
-import PostsQuery from './query';
+import PostsQuery from './postsQuery';
 import { connect } from 'react-apollo';
-
-let runApolloTimeout;
 
 const postsQuery = new PostsQuery({
 	first: 20,
