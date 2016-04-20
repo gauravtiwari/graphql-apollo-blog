@@ -4,8 +4,17 @@ QueryType = GraphQL::ObjectType.define do
 
   field :posts, types[PostType] do
     description 'Post collections'
-    resolve -> (obj, args, ctx) {
+    resolve -> (object, object, context) {
       @posts = Post.all.includes(:user)
+    }
+  end
+
+  field :post do
+    type PostType
+    description "Find a Post by id"
+    argument :id, !types.ID
+    resolve -> (object, object, context) {
+      Post.find(arguments["id"])
     }
   end
 end
