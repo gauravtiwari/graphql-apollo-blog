@@ -15,7 +15,7 @@ module.exports = {
     'babel-polyfill',
     'react-dom/server',
     'react',
-    './app/assets/javascripts/components',
+    './app/assets/javascripts/bootstrapper',
   ],
   // Bundled output path
   output: {
