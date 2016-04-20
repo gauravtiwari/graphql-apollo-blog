@@ -16,11 +16,15 @@
  *= require_self
  */
 
+body {
+  padding: 0;
+  margin: 0;
+}
 .container {
   max-width: 980px;
   margin: 0 auto;
 }
-h1 {
+.container h1 {
   padding: 16px;
 }
 .postsShow {
