@@ -10,18 +10,27 @@ class NavBarComponent extends React.Component {
   }
 
   render() {
-    const { current_user } = this.props;
-    const loggedIn = !current_user.loading && current_user.result.current_user != null;
+    const { data } = this.props;
+    const loggedIn = !data.loading && data.result.current_user != null;
     const text = loggedIn ?
-      current_user.result.current_user.name : "Login";
+      data.result.current_user.name : "Login";
 
-    const loginUrl = loggedIn ? '' : '/users/sign_in';
+    const loginUrl = loggedIn ? '/users/sign_out' : '/users/sign_in';
+
+    const method = loggedIn ? 'DELETE' : 'GET';
 
     return(
       <div className="nav">
         <AppBar
           title="ApolloRails"
-          iconElementRight={<FlatButton label={text} href={loginUrl} linkButton={true} />}
+          iconElementRight={
+            <FlatButton
+              label={text}
+              data-method={method}
+              href={loginUrl}
+              linkButton={true}
+            />
+          }
         />
       </div>
     );
@@ -30,7 +39,7 @@ class NavBarComponent extends React.Component {
 
 function mapQueriesToProps({ ownProps, state }) {
   return {
-    current_user: new currentUserQuery(),
+    data: new currentUserQuery(),
   };
 };
 

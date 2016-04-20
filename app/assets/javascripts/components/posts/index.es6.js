@@ -36,18 +36,18 @@ class PostsIndexComponent extends React.Component {
 
   _handleScrollLoad() {
     if (App.scrolledToBottom() && !this.state.loading) {
-      console.log(this.props.posts); // Implement later
+      console.log(this.props.data); // Implement later
     }
   }
 
   render() {
-    const { posts } = this.props;
+    const { data } = this.props;
     let postList;
 
-    if (posts.loading) {
+    if (data.loading) {
       postList = "Loading...";
     } else {
-      postList = posts.result.posts.map((post) => {
+      postList = data.result.posts.map((post) => {
       return <ListItem
               primaryText={post.title}
               key={post.id}
@@ -77,7 +77,7 @@ class PostsIndexComponent extends React.Component {
 
 function mapQueriesToProps({ ownProps, state }) {
   return {
-    posts: postsQuery,
+    data: postsQuery,
   };
 };
 

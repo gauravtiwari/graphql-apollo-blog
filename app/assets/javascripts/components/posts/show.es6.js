@@ -12,20 +12,20 @@ class PostsShowComponent extends React.Component {
   }
 
   render() {
-    const { post } = this.props;
+    const { data } = this.props;
 
     let postPreview;
 
-    if (post.loading) {
+    if (data.loading) {
       postPreview = "Loading...";
     } else {
       postPreview = <Card>
                       <CardTitle
-                        title={post.result.post.title}
-                        subtitle={post.result.post.user.name}
+                        title={data.result.post.title}
+                        subtitle={data.result.post.user.name}
                       />
                       <CardText>
-                        {post.result.post.body}
+                        {data.result.post.body}
                       </CardText>
                     </Card>;
     }
@@ -40,7 +40,7 @@ class PostsShowComponent extends React.Component {
 
 function mapQueriesToProps({ ownProps, state }) {
   return {
-    post: new PostQuery({id: ownProps.hydrated.id}),
+    data: new PostQuery({id: ownProps.hydrated.id}),
   };
 };
 
