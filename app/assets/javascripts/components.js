@@ -11,3 +11,19 @@ App.setTimeout = null;
 App.PostsIndexComponent = PostsIndexComponent;
 App.currentUser = currentUser;
 App.Environment = Environment;
+
+import ApolloClient from 'apollo-client';
+import { Provider } from 'react-apollo';
+const client = new ApolloClient();
+
+
+document.addEventListener("turbolinks:load", function() {
+  if(document.getElementById('posts') !== null) {
+    ReactDOM.render(
+      <Provider client={client}>
+        <PostsIndexComponent />
+      </Provider>,
+      document.getElementById('posts')
+    );
+  }
+});

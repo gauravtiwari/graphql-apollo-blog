@@ -1,71 +1,48 @@
 import React from 'react';
-import ApolloClient from 'apollo-client';
 import PostPreview from './postPreview';
 import PostsQuery from './query';
+import { connect } from 'react-apollo';
 
 let runApolloTimeout;
 
-const client = new ApolloClient();
 const postsQuery = new PostsQuery({
-	first: 80,
+	first: 20,
 });
 
 class PostsIndexComponent extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = {
-			posts: props.posts,
-			server: true,
-		};
-	}
-
-	componentWillUnmount() {
-		clearTimeout(runApolloTimeout);
-	}
-
-	componentDidMount() {
-		runApolloTimeout = setTimeout(() => {
-			this.runApolloQuery();
-		}, 3000);
-	}
-
-	runApolloQuery() {
-		const handle = client.query(
-			postsQuery
-		);
-
-		// Listen for promise
-		handle.then((graphQLResult) => {
-		  const { errors, data } = graphQLResult;
-
-		  if (data) {
-		  	this.setState({
-		  		posts: data.posts,
-		  		server: false
-		  	});
-		  }
-
-		  if (errors) {
-		    console.log('got some GraphQL execution errors', errors);
-		  }
-		});
 	}
 
 	render() {
-		const postList = this.state.posts.map((post) => {
-			return <PostPreview key={post.id} post={post} />;
-		});
+    const { posts } = this.props;
+    let postList;
 
-		const text = this.state.server ? 'Loaded from server' : 'Loaded via Graphql'
+    if (posts.loading) {
+      postList = "Loading...";
+    } else {
+      postList = posts.result.posts.map((post) => {
+        return <PostPreview key={post.id} post={post} />;
+      });
+    }
 
 		return(
 			<div className="postsList">
-				<h1> List of Posts: {text} </h1>
-				<hr />
-				{postList}
+				<h1>List of Posts </h1>
+        {postList}
 			</div>
 		);
 	}
 }
 
-module.exports = PostsIndexComponent;
+function mapQueriesToProps({ ownProps, state }) {
+  return {
+    posts: postsQuery,
+  };
+};
+
+const PostsWithData = connect({
+  mapQueriesToProps,
+})(PostsIndexComponent);
+
+export default PostsWithData;

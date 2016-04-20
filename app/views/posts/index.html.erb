@@ -1,9 +1,1 @@
-<%= react_component("App.PostsIndexComponent", {
-    posts: Post.limit(20).includes(:user).map{
-    |post| {
-            id: post.id,
-            title: post.title,
-            body: post.body,
-            url: post_path(post)
-          }
-    }}.to_json, {prerender: true}) %>
+<div id="posts"></div>
