@@ -19,12 +19,12 @@ gem 'therubyracer', platforms: :ruby
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
 gem 'turbolinks', '~> 5.x'
 
+# Add execjs
+gem 'execjs'
+
 # Graphql
 gem 'graphql'
 gem 'graphql-relay'
-
-# React
-gem 'react-rails'
 
 # Authentication
 gem 'devise', '4.0.0.rc2'
