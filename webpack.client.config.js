@@ -25,6 +25,7 @@ module.exports = {
       './app/assets/javascripts/components',
     ],
   },
+  devtool: '#inline-source-map',
   output: {
     filename: '[name]-bundle.js',
     path: './app/assets/webpack',
@@ -68,8 +69,7 @@ module.exports = {
         loader: 'imports?shim=es5-shim/es5-shim&sham=es5-shim/es5-sham',
       },
       { test: require.resolve('react'), loader: 'expose?React' },
-      { test: require.resolve('react-dom'), loader: 'expose?ReactDOM' },
-      { test: require.resolve('react-dom/server'), loader: 'expose?ReactDOMServer' }
+      { test: require.resolve('react-dom'), loader: 'expose?ReactDOM' }
     ],
   },
 };

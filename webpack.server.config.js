@@ -22,7 +22,7 @@ module.exports = {
     filename: 'server-bundle.js',
     path: './app/assets/webpack',
   },
-
+  devtool: '#inline-source-map',
   // Extensions to resolve
   resolve: {
     extensions: ['', '.js', '.jsx', '.es6.js'],
