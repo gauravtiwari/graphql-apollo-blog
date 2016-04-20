@@ -22,6 +22,9 @@ gem 'turbolinks', '~> 5.x'
 # Add execjs
 gem 'execjs'
 
+# Pagination
+gem 'will_paginate'
+
 # Graphql
 gem 'graphql'
 gem 'graphql-relay'

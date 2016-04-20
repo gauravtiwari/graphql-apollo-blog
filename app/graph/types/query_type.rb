@@ -19,4 +19,12 @@ QueryType = GraphQL::ObjectType.define do
       Post.find(arguments["id"])
     }
   end
+
+  field :current_user do
+    type UserType
+    description "Find current logged in user"
+    resolve -> (object, arguments, context) {
+      context[:current_user] ? context[:current_user] : nil
+    }
+  end
 end

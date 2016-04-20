@@ -6,12 +6,21 @@ Expose all components to { window or global }
 import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
+import App from './helpers/app';
 import createReactElement from './utils/createReactElement';
 
 // Apollo client
-import ApolloClient from 'apollo-client';
+import ApolloClient, { createNetworkInterface } from 'apollo-client';
 import { Provider } from 'react-apollo';
-const client = new ApolloClient();
+
+const networkInterface = createNetworkInterface('/graphql', {
+  credentials: 'same-origin',
+  headers: {
+    'X-CSRF-Token': App.csrfToken(),
+  }
+});
+
+const client = new ApolloClient({networkInterface});
 
 // UnMount component from a Node
 function unmountComponents() {

@@ -8,6 +8,10 @@ App.loggedIn = () => {
   }
 };
 
+App.scrolledToBottom = () => {
+  return $(window).scrollTop() > $(document).height() - $(window).height() - 200
+}
+
 App.csrfToken = () => {
   return $('[name="csrf-token"]').attr('content');
 };
