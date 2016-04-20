@@ -32,7 +32,5 @@ module ApolloOnRails
       g.view_specs      false
       g.helper_specs    false
     end
-
-    config.browserify_rails.commandline_options = "-t babelify --extension=\"es6.js\""
   end
 end

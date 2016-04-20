@@ -1,9 +1,6 @@
-//= require jquery
-//= require jquery_ujs
-//= require action_cable
-//= require_tree ./channels
-//= require react
-//= require react-server
-//= require components
+//= require vendor-bundle
+//= require app-bundle
+
 //= require turbolinks
+//= require cable
 //= require react_ujs
