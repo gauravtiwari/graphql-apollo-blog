@@ -23,9 +23,6 @@ gem 'turbolinks', '~> 5.x'
 gem 'graphql'
 gem 'graphql-relay'
 
-# Browserify
-gem 'browserify-rails'
-
 # React
 gem 'react-rails'
 
