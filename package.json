@@ -4,7 +4,8 @@
   "description": "Apollo graphql client with react on rails ",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build:dev:client": "node_modules/webpack/bin/webpack.js -w --config webpack.client.config.js",
+    "build:dev:server": "node_modules/webpack/bin/webpack.js -w --config webpack.server.config.js"
   },
   "repository": {
     "type": "git",
