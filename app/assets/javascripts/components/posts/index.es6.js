@@ -20,7 +20,7 @@ class PostsIndexComponent extends React.Component {
     Turbolinks.visit("/posts/" + id);
   }
 
-	render() {
+  render() {
     const { posts } = this.props;
     let postList;
 
@@ -28,31 +28,31 @@ class PostsIndexComponent extends React.Component {
       postList = "Loading...";
     } else {
       postList = posts.result.posts.map((post) => {
-        return <ListItem
-            primaryText={post.title}
-            key={post.id}
-            onClick={this._showPost.bind(this, post.id)}
-            secondaryText={
+      return <ListItem
+              primaryText={post.title}
+              key={post.id}
+              onClick={this._showPost.bind(this, post.id)}
+              secondaryText={
               <p>
-                <span style={{color: Colors.darkBlack}}>{post.user.name}</span> --
-                {post.body}
+              <span style={{color: Colors.darkBlack}}>{post.user.name}</span> --
+              {post.body}
               </p>
-            }
-            secondaryTextLines={2}
-          />;
+              }
+              secondaryTextLines={2}
+            />;
       });
     }
 
-		return(
-			<div className="postsList">
+    return(
+      <div className="postsList">
         <h1>List of Posts</h1>
         <List>
           {postList}
         </List>
         <Divider inset={true} />
-			</div>
-		);
-	}
+      </div>
+    );
+  }
 }
 
 function mapQueriesToProps({ ownProps, state }) {

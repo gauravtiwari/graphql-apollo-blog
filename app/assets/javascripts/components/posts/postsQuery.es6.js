@@ -3,17 +3,17 @@ class PostsQuery {
     const query = {
     query: `
       query getPosts($first: Int!) {
-      	posts(first: $first) {
-      		id
-      		title,
-      		body,
-      		url,
-      		user {
-      			id,
-      			name,
-      			email
-      		}
-      	}
+        posts(first: $first) {
+          id,
+          title,
+          body,
+          url,
+          user {
+            id,
+            name,
+            email,
+          }
+        }
       }
       `,
       variables: variables,
@@ -23,4 +23,5 @@ class PostsQuery {
     return query;
   }
 }
+
 export default PostsQuery;
