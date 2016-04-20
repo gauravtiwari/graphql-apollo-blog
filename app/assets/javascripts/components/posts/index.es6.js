@@ -8,13 +8,13 @@ import Divider from 'material-ui/lib/divider';
 import Colors from 'material-ui/lib/styles/colors';
 
 const postsQuery = new PostsQuery({
-	first: 20,
+  first: 20,
 });
 
 class PostsIndexComponent extends React.Component {
-	constructor(props) {
-		super(props);
-	}
+  constructor(props) {
+    super(props);
+  }
 
   _showPost(id) {
     Turbolinks.visit("/posts/" + id);

@@ -11,8 +11,8 @@ import PostsShowComponent from './components/posts/show.es6.js';
 
 // Use the registered name in Rails Views as component names
 export default function registerComponent() {
-	reactComponent.register({
-		PostsIndexComponent,
-		PostsShowComponent,
-	});
+  reactComponent.register({
+    PostsIndexComponent,
+    PostsShowComponent,
+  });
 }
