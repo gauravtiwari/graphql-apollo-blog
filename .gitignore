@@ -22,4 +22,4 @@
 node_modules/*
 npm_debug*
 npm-debug*
-app/webpack/*
+app/assets/webpack/*
