@@ -1,5 +1,4 @@
 import React from 'react';
-import PostPreview from './postPreview';
 import PostQuery from './postQuery';
 import { connect } from 'react-apollo';
 
