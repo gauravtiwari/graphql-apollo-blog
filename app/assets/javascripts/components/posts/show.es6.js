@@ -3,10 +3,6 @@ import PostPreview from './postPreview';
 import PostQuery from './postQuery';
 import { connect } from 'react-apollo';
 
-const postQuery = new PostsQuery({
-  id: 20,
-});
-
 class PostsShowComponent extends React.Component {
   constructor(props) {
     super(props);
@@ -20,7 +16,7 @@ class PostsShowComponent extends React.Component {
     if (post.loading) {
       postPreview = "Loading...";
     } else {
-      postPreview = <PostPreview key={post.result.id} post={post.result} />;
+      postPreview = <PostPreview key={post.result.post.id} post={post.result.post} />;
     }
 
     return(
@@ -33,7 +29,7 @@ class PostsShowComponent extends React.Component {
 
 function mapQueriesToProps({ ownProps, state }) {
   return {
-    post: postQuery,
+    post: new PostQuery({id: ownProps.hydrated.id}),
   };
 };
 

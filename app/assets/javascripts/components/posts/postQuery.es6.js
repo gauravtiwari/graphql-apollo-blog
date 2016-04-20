@@ -2,7 +2,7 @@ class postQuery {
   constructor(variables) {
     const query = {
       query: `
-        query getPost($id: Int!) {
+        query getPost($id: ID!) {
           post(id: $id) {
             id
             title,

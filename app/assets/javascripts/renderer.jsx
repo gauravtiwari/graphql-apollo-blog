@@ -25,20 +25,16 @@ function mountComponents() {
 	$('[data-react-component]').each(function(index, el) {
 		const componentName = $(el).data('react-component-name');
 		const props = $(el).data('react-component-props');
-		$(el).attr('id', `react-component-name-${index}`);
-		const domNodeId = $(el)[0];
 
-		const reactElementOrRouterResult = createReactElement(
+		const reactElement = createReactElement(
 		  componentName,
 		  props,
-		  domNodeId,
+		  document.getElementById($(el).attr('id'))
 		);
 
 	  ReactDOM.render(
-      <Provider client={client}>
-        reactElementOrRouterResult
-      </Provider>,
-      domNodeId
+      <Provider client={client} children={reactElement} />,
+      document.getElementById($(el).attr('id'))
     );
 	});
 }
