@@ -2,10 +2,12 @@ QueryType = GraphQL::ObjectType.define do
   name "Query"
   description "Query root for Schema"
 
-  field :posts, types[PostType] do
+  field :posts do
+    type types[PostType]
     description 'Post collections'
-    resolve -> (object, object, context) {
-      @posts = Post.all.includes(:user)
+    argument :first, !types.Int
+    resolve -> (object, arguments, context) {
+      @posts = Post.all.includes(:user).limit(arguments["first"])
     }
   end
 
@@ -13,7 +15,7 @@ QueryType = GraphQL::ObjectType.define do
     type PostType
     description "Find a Post by id"
     argument :id, !types.ID
-    resolve -> (object, object, context) {
+    resolve -> (object, arguments, context) {
       Post.find(arguments["id"])
     }
   end

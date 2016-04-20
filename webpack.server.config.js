@@ -15,7 +15,9 @@ module.exports = {
     'babel-polyfill',
     'react-dom/server',
     'react',
-    './app/assets/javascripts/bootstrapper',
+    'apollo-client',
+    'react-apollo',
+    './app/assets/javascripts/serverBootstrapper',
   ],
   // Bundled output path
   output: {
@@ -43,9 +45,9 @@ module.exports = {
       // react-rails would need certain global objects plus we need to use babel loader
       // for ES6 code
       { test: /\.jsx?$/, loader: 'babel-loader', exclude: /node_modules/ },
-      { test: require.resolve('jquery'), loader: 'expose?jQuery' },
-      { test: require.resolve('jquery'), loader: 'expose?$' },
       { test: require.resolve('react'), loader: 'expose?React' },
+      { test: require.resolve('react-apollo'), loader: 'expose?Provider' },
+      { test: require.resolve('react-apollo'), loader: 'expose?connect' },
       { test: require.resolve('react-dom/server'), loader: 'expose?ReactDOMServer' }
     ],
   },

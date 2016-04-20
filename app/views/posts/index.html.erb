@@ -1,1 +1,8 @@
-<div id="posts"></div>
+<%= react_component('PostsIndexComponent', {
+    posts: Post.all.map{|post| {
+        id: post.id,
+        title: post.title,
+        body: post.body
+    }}
+  }.to_json, {tag: "article"})
+%>

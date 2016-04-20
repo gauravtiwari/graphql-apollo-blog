@@ -17,6 +17,7 @@ module.exports = {
       'react-dom',
       'react-dom/server',
       'react',
+      'turbolinks',
       'es5-shim/es5-shim',
       'es5-shim/es5-sham',
     ],
@@ -62,6 +63,7 @@ module.exports = {
         loader: 'babel-loader',
         exclude: /node_modules/,
       },
+      { test: require.resolve('turbolinks'), loader: 'imports?this=>window' },
       { test: require.resolve('jquery'), loader: 'expose?jQuery' },
       { test: require.resolve('jquery'), loader: 'expose?$' },
       {
@@ -69,7 +71,8 @@ module.exports = {
         loader: 'imports?shim=es5-shim/es5-shim&sham=es5-shim/es5-sham',
       },
       { test: require.resolve('react'), loader: 'expose?React' },
-      { test: require.resolve('react-dom'), loader: 'expose?ReactDOM' }
+      { test: require.resolve('react-dom'), loader: 'expose?ReactDOM' },
+      { test: require.resolve('react-dom/server'), loader: 'expose?ReactDOMServer' }
     ],
   },
 };
