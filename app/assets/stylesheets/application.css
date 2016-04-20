@@ -1,3 +1,5 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,400italic,300,500,700);
+
 /*
  * This is a manifest file that'll be compiled into application.css, which will include all the files
  * listed below.
@@ -13,3 +15,16 @@
  *= require_tree .
  *= require_self
  */
+
+.container {
+  max-width: 980px;
+  margin: 0 auto;
+}
+h1 {
+  padding: 16px;
+}
+.postsShow {
+  padding-top: 100px;
+  margin-bottom: 20px;
+}
+}

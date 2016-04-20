@@ -3,6 +3,10 @@ import PostPreview from './postPreview';
 import PostQuery from './postQuery';
 import { connect } from 'react-apollo';
 
+import Card from 'material-ui/lib/card/card';
+import CardTitle from 'material-ui/lib/card/card-title';
+import CardText from 'material-ui/lib/card/card-text';
+
 class PostsShowComponent extends React.Component {
   constructor(props) {
     super(props);
@@ -16,7 +20,12 @@ class PostsShowComponent extends React.Component {
     if (post.loading) {
       postPreview = "Loading...";
     } else {
-      postPreview = <PostPreview key={post.result.post.id} post={post.result.post} />;
+      postPreview = <Card>
+                      <CardTitle title={post.result.post.title} subtitle={post.result.post.user.name} />
+                      <CardText>
+                        {post.result.post.body}
+                      </CardText>
+                    </Card>;
     }
 
     return(
