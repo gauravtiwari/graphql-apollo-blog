@@ -1,5 +1,5 @@
 /*
-Expose all components to { window or global }
+  Render all components to DOM based on [data-react-component]
 */
 
 // React Specific
@@ -13,6 +13,7 @@ import createReactElement from './utils/createReactElement';
 import ApolloClient, { createNetworkInterface } from 'apollo-client';
 import { Provider } from 'react-apollo';
 
+// Send headers with network interface
 const networkInterface = createNetworkInterface('/graphql', {
   credentials: 'same-origin',
   headers: {
@@ -20,6 +21,7 @@ const networkInterface = createNetworkInterface('/graphql', {
   }
 });
 
+// Initialize client with new network interface
 const client = new ApolloClient({networkInterface});
 
 // UnMount component from a Node

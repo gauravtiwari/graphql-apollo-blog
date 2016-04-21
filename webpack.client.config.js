@@ -23,7 +23,7 @@ module.exports = {
     ],
     // Main component entry file: components.jsx
     app: [
-      './app/assets/javascripts/bootstrapper',
+      './app/assets/javascripts/clientEntry',
     ],
   },
   devtool: '#inline-source-map',

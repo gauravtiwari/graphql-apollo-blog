@@ -1,6 +1,5 @@
 /*
-	Render react component dynamically based on  data-attr
-	See rails view
+	Client: Entry file for webpack
 */
 
 import injectTapEventPlugin from 'react-tap-event-plugin';
