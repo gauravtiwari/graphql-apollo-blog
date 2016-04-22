@@ -27,19 +27,22 @@ module ReactHelper
     @react_component_index += 1
   end
 
+
+  def props_string(props)
+    props.is_a?(String) ? props : props.to_json
+  end
+
   def server_render(component_name, props)
     @context = ExecJS.compile(Rails.application.assets["server-bundle.js"].to_s)
     js_code = <<-JS
     (function() {
+      var props = #{props_string(props)};
       return reactComponent.serverRenderReactComponent({
         name: '#{component_name}',
-        props: '#{props}'
+        props: props
       });
     })()
     JS
-
-    puts js_code
-
     @context.eval(js_code).html_safe
   end
 end
