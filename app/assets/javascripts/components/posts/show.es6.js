@@ -12,8 +12,8 @@ class PostsShowComponent extends React.Component {
   }
 
   render() {
+        console.log(this.props);
     const { data } = this.props;
-
     let postPreview;
 
     if (data.loading) {
@@ -40,7 +40,7 @@ class PostsShowComponent extends React.Component {
 
 function mapQueriesToProps({ ownProps, state }) {
   return {
-    data: new PostQuery({id: ownProps.hydrated.id}),
+    data: new PostQuery({id: ownProps.post.id}),
   };
 };
 
@@ -49,3 +49,5 @@ const PostWithData = connect({
 })(PostsShowComponent);
 
 export default PostWithData;
+
+

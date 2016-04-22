@@ -1,7 +1,6 @@
 import React from 'react';
 import PostsQuery from './postsQuery';
 import { connect } from 'react-apollo';
-import App from '../../helpers/app';
 
 import List from 'material-ui/lib/lists/list';
 import ListItem from 'material-ui/lib/lists/list-item';
@@ -15,7 +14,6 @@ const postsQuery = new PostsQuery({
 class PostsIndexComponent extends React.Component {
   constructor(props) {
     super(props);
-    this._handleScrollLoad = this._handleScrollLoad.bind(this);
     this.state = {
       loading: false,
     };
@@ -23,21 +21,6 @@ class PostsIndexComponent extends React.Component {
 
   _showPost(id) {
     Turbolinks.visit("/posts/" + id);
-  }
-
-
-  componentWillUnmount() {
-    window.removeEventListener('scroll', this._handleScrollLoad);
-  }
-
-  componentDidMount() {
-    window.addEventListener('scroll', this._handleScrollLoad);
-  }
-
-  _handleScrollLoad() {
-    if (App.scrolledToBottom() && !this.state.loading) {
-      console.log(this.props.data); // Implement later
-    }
   }
 
   render() {
