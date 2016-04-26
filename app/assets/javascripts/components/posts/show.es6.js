@@ -12,7 +12,6 @@ class PostsShowComponent extends React.Component {
   }
 
   render() {
-        console.log(this.props);
     const { data } = this.props;
     let postPreview;
 

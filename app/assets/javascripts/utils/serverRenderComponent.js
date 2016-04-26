@@ -10,15 +10,15 @@ export default function serverRenderComponent(options) {
   let htmlResult = '';
   let errors = '';
 
-  const client = new ApolloClient({
-    initialState: props,
-  });
+  const client = new ApolloClient();
 
   const reactElement = createReactElement(name, props);
 
-  htmlResult = ReactDOMServer.renderToString(
+  htmlResult = ReactDOMServer.renderToStaticMarkup(
     <Provider client={client} children={reactElement} />
   );
 
-  return htmlResult;
+  const initialState = client.store.getState();
+
+  return htmlResult + "<script>window._APOLLO_STORE = " + JSON.stringify(initialState) + "</script>";
 }
