@@ -47,7 +47,6 @@ function mountComponents() {
     // Initialize client with new network interface
     const client = new ApolloClient({
       networkInterface,
-      initialState: _APOLLO_STORE,
     });
 
     ReactDOM.render(
