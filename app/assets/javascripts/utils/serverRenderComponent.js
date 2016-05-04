@@ -18,7 +18,6 @@ export default function serverRenderComponent(options) {
     <Provider client={client} children={reactElement} />
   );
 
-  const initialState = client.store.getState();
 
-  return htmlResult + "<script>window._APOLLO_STORE = " + JSON.stringify(initialState) + "</script>";
+  return htmlResult;
 }
