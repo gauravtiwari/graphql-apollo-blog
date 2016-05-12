@@ -1,7 +1,8 @@
+import gql from 'apollo-client/gql';
 class postQuery {
   constructor(variables) {
     const query = {
-      query: `
+      query: gql`
         query getLoggedInUser {
           current_user {
             id,

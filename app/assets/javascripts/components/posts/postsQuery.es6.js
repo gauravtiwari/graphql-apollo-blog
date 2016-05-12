@@ -1,7 +1,9 @@
+import gql from 'apollo-client/gql';
+
 class PostsQuery {
   constructor(variables) {
     const query = {
-    query: `
+    query: gql`
       query getPosts($first: Int!) {
         posts(first: $first) {
           id,

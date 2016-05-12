@@ -11,9 +11,9 @@ class NavBarComponent extends React.Component {
 
   render() {
     const { data } = this.props;
-    const loggedIn = !data.loading && data.result.current_user != null;
+    const loggedIn = !data.loading && data.current_user != null;
     const text = loggedIn ?
-      data.result.current_user.name : "Login";
+      data.current_user.name : "Login";
 
     const loginUrl = loggedIn ? '/users/sign_out' : '/users/sign_in';
 

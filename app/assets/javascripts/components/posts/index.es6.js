@@ -30,7 +30,7 @@ class PostsIndexComponent extends React.Component {
     if (data.loading) {
       postList = "Loading...";
     } else {
-      postList = data.result.posts.map((post) => {
+      postList = data.posts.map((post) => {
       return <ListItem
               primaryText={post.title}
               key={post.id}

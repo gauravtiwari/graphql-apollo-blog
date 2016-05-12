@@ -11,7 +11,7 @@ import createReactElement from './utils/createReactElement';
 
 // Apollo client
 import ApolloClient, { createNetworkInterface } from 'apollo-client';
-import { Provider } from 'react-apollo';
+import { ApolloProvider } from 'react-apollo';
 
 // Send headers with network interface
 const networkInterface = createNetworkInterface('/graphql', {
@@ -36,6 +36,7 @@ function mountComponents() {
     const jsonProps = node.getAttribute('data-react-component-props');
     const componentName = node.getAttribute('data-react-component-name');
 
+
     const props = jsonProps && JSON.parse(jsonProps);
 
     const reactElement = createReactElement(
@@ -50,7 +51,7 @@ function mountComponents() {
     });
 
     ReactDOM.render(
-      <Provider client={client} children={reactElement} />,
+      <ApolloProvider client={client} children={reactElement} />,
       node
     );
   };

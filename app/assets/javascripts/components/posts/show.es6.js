@@ -20,11 +20,11 @@ class PostsShowComponent extends React.Component {
     } else {
       postPreview = <Card>
                       <CardTitle
-                        title={data.result.post.title}
-                        subtitle={data.result.post.user.name}
+                        title={data.post.title}
+                        subtitle={data.post.user.name}
                       />
                       <CardText>
-                        {data.result.post.body}
+                        {data.post.body}
                       </CardText>
                     </Card>;
     }
@@ -48,5 +48,3 @@ const PostWithData = connect({
 })(PostsShowComponent);
 
 export default PostWithData;
-
-
