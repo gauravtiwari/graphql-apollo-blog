@@ -15,6 +15,8 @@ module.exports = {
     'babel-polyfill',
     'react-dom/server',
     'react',
+    'apollo-client',
+    'react-apollo',
     './app/assets/javascripts/serverEntry',
   ],
   // Bundled output path

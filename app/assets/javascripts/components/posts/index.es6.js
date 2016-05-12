@@ -52,6 +52,7 @@ class PostsIndexComponent extends React.Component {
         <List>
           {postList}
         </List>
+        <script dangerouslySetInnerHTML={{__html: `window.__APOLLO_CONTEXT__ = ${JSON.stringify(data.posts)};`}}></script>
         <Divider inset={true} />
       </div>
     );
