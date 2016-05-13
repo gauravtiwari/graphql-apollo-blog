@@ -14,7 +14,7 @@ export default function serverRenderComponent(options) {
 
   const reactElement = createReactElement(name, props);
 
-  const initialState = client.store.getState();
+  const initialState = client.initialState;
 
   htmlResult = ReactDOMServer.renderToStaticMarkup(
     <ApolloProvider initialState={initialState} client={client} children={reactElement} />
