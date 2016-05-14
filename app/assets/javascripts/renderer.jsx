@@ -51,8 +51,10 @@ function mountComponents() {
       initialState: window.__APOLLO_CONTEXT__,
     });
 
+    const initialState = client.initialState;
+
     ReactDOM.render(
-      <ApolloProvider client={client} children={reactElement} />,
+      <ApolloProvider initialState={initialState} client={client} children={reactElement} />,
       node
     );
   };
