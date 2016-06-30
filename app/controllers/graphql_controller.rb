@@ -5,7 +5,6 @@ class GraphqlController < ApplicationController
     schema = GraphQL::Schema.new(query: QueryType)
     result = schema.execute(
       params[:query],
-      debug: true,
       variables: params[:variables],
       context: {
         current_user: set_current_user
