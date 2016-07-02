@@ -10,6 +10,15 @@ class postQuery {
             title,
             body,
             url,
+            comments {
+            id,
+            body,
+            created_at,
+              user {
+                id,
+                name,
+              }
+            }
             user {
               id,
               name,
