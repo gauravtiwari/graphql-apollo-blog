@@ -1,7 +1,7 @@
 ActiveRecord::Base.transaction do
-  User.delete_all
-  Post.delete_all
-  Comment.delete_all
+  User.destroy_all
+  Post.destroy_all
+  Comment.destroy_all
 
   10.times do |i|
     user = User.create!(
