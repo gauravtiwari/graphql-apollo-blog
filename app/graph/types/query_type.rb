@@ -7,7 +7,7 @@ QueryType = GraphQL::ObjectType.define do
     description 'Post collections'
     argument :first, !types.Int
     resolve -> (object, arguments, context) {
-      @posts = Post.all.includes(:user).limit(arguments["first"])
+      @posts = Post.all.eager_load(:user).limit(arguments["first"])
     }
   end
 
@@ -16,7 +16,7 @@ QueryType = GraphQL::ObjectType.define do
     description "Find a Post by id"
     argument :id, !types.ID
     resolve -> (object, arguments, context) {
-      Post.find(arguments["id"])
+      Post.eager_load(:user).find(arguments["id"])
     }
   end
 
