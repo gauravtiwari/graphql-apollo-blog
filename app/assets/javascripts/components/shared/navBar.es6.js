@@ -1,12 +1,22 @@
 import React from 'react';
 import { connect } from 'react-apollo';
-import AppBar from 'material-ui/lib/app-bar';
-import FlatButton from 'material-ui/lib/flat-button';
+import AppBar from 'material-ui/AppBar';
+import FlatButton from 'material-ui/FlatButton';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import currentUserQuery from '../posts/currentUserQuery';
+import baseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
 
 class NavBarComponent extends React.Component {
   constructor(props) {
     super(props);
+  }
+
+  getChildContext() {
+    return {
+      muiTheme: getMuiTheme(baseTheme)
+    };
   }
 
   render() {
@@ -20,22 +30,27 @@ class NavBarComponent extends React.Component {
     const method = loggedIn ? 'DELETE' : 'GET';
 
     return(
-      <div className="nav">
-        <AppBar
-          title="ApolloRails"
-          iconElementRight={
-            <FlatButton
-              label={text}
-              data-method={method}
-              href={loginUrl}
-              linkButton={true}
-            />
-          }
-        />
-      </div>
+      <MuiThemeProvider muiTheme={getMuiTheme(lightBaseTheme)}>
+        <div className="nav">
+          <AppBar
+            title="ApolloRails"
+            iconElementRight={
+              <FlatButton
+                label={text}
+                data-method={method}
+                href={loginUrl}
+              />
+            }
+          />
+        </div>
+      </MuiThemeProvider>
     );
   }
 }
+
+NavBarComponent.childContextTypes = {
+  muiTheme: React.PropTypes.object.isRequired,
+};
 
 function mapQueriesToProps({ ownProps, state }) {
   return {

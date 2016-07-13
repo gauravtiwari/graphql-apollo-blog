@@ -1,4 +1,4 @@
-import gql from 'apollo-client/gql';
+import gql from 'graphql-tag';
 
 class PostsQuery {
   constructor(variables) {

@@ -2,13 +2,14 @@ import React from 'react';
 import PostQuery from './postQuery';
 import { connect } from 'react-apollo';
 
-import Card from 'material-ui/lib/card/card';
-import CardTitle from 'material-ui/lib/card/card-title';
-import CardText from 'material-ui/lib/card/card-text';
-import CardHeader from 'material-ui/lib/card/card-header';
+import {Card, CardHeader, CardTitle, CardText} from 'material-ui/Card';
 
-import Divider from 'material-ui/lib/divider';
-import Colors from 'material-ui/lib/styles/colors';
+import Divider from 'material-ui/Divider';
+import Colors from 'material-ui/styles/colors';
+
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import baseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
 
 const commentStyle = {
@@ -28,6 +29,13 @@ class PostsShowComponent extends React.Component {
   constructor(props) {
     super(props);
   }
+
+  getChildContext() {
+    return {
+      muiTheme: getMuiTheme(baseTheme)
+    };
+  }
+
 
   render() {
     const { data } = this.props;
@@ -72,6 +80,11 @@ class PostsShowComponent extends React.Component {
     );
   }
 }
+
+PostsShowComponent.childContextTypes = {
+  muiTheme: React.PropTypes.object.isRequired,
+};
+
 
 function mapQueriesToProps({ ownProps, state }) {
   return {

@@ -2,10 +2,13 @@ import React from 'react';
 import PostsQuery from './postsQuery';
 import { connect } from 'react-apollo';
 
-import List from 'material-ui/lib/lists/list';
-import ListItem from 'material-ui/lib/lists/list-item';
-import Divider from 'material-ui/lib/divider';
-import Colors from 'material-ui/lib/styles/colors';
+import { ListItem, List } from 'material-ui/List';
+import Divider from 'material-ui/Divider';
+import { darkBlack } from 'material-ui/styles/colors';
+
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import baseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
 const postsQuery = new PostsQuery({
   first: 20,
@@ -16,6 +19,12 @@ class PostsIndexComponent extends React.Component {
     super(props);
     this.state = {
       loading: false,
+    };
+  }
+
+  getChildContext() {
+    return {
+      muiTheme: getMuiTheme(baseTheme)
     };
   }
 
@@ -37,7 +46,7 @@ class PostsIndexComponent extends React.Component {
               onClick={this._showPost.bind(this, post.id)}
               secondaryText={
               <p>
-              <span style={{color: Colors.darkBlack}}>{post.user.name}</span> --
+              <span style={{color: darkBlack}}>{post.user.name}</span> --
               {post.body}
               </p>
               }
@@ -57,6 +66,11 @@ class PostsIndexComponent extends React.Component {
     );
   }
 }
+
+PostsIndexComponent.childContextTypes = {
+  muiTheme: React.PropTypes.object.isRequired,
+};
+
 
 function mapQueriesToProps({ ownProps, state }) {
   return {
