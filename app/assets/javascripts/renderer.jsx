@@ -8,18 +8,11 @@ import ReactDOM from 'react-dom';
 import $ from 'jquery';
 import App from './helpers/app';
 import createReactElement from './utils/createReactElement';
+import networkInterface from './setNetworkLayer.es6.js';
 
 // Apollo client
 import ApolloClient, { createNetworkInterface } from 'apollo-client';
 import { ApolloProvider } from 'react-apollo';
-
-// Send headers with network interface
-const networkInterface = createNetworkInterface('/graphql', {
-  credentials: 'same-origin',
-  headers: {
-    'X-CSRF-Token': App.csrfToken(),
-  }
-});
 
 // UnMount component from a Node
 function unmountComponents() {

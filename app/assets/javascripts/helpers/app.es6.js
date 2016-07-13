@@ -1,19 +1,19 @@
-const App = window.App || (window.App = {});
+// Generic app helpers
 
-App.loggedIn = () => {
-  if ($('meta[name=logged_in]').attr('authenticated') === "true") {
-    return true;
-  } else {
-    return false;
+const documentDefined = typeof document !== 'undefined' ? true : false;
+
+export default class App {
+  loggedIn() {
+    return documentDefined ?
+      document.getElementsByName('logged_in')[0].authenticated : '';
   }
-};
+  csrfToken() {
+    return documentDefined ?
+      document.getElementsByName('csrf-token')[0].content : '';
+  }
 
-App.scrolledToBottom = () => {
-  return $(window).scrollTop() > $(document).height() - $(window).height() - 200
+  authToken() {
+    return documentDefined ?
+      document.getElementsByName('auth-token')[0].content : '';
+  }
 }
-
-App.csrfToken = () => {
-  return $('[name="csrf-token"]').attr('content');
-};
-
-module.exports = App;
