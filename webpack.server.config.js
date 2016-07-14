@@ -12,7 +12,6 @@ module.exports = {
 
   // Vendor and entry point of the app
   entry: [
-    'babel-polyfill',
     'react-dom/server',
     'react',
     'apollo-client',
@@ -38,6 +37,10 @@ module.exports = {
       'process.env': {
         NODE_ENV: JSON.stringify(nodeEnv),
       },
+      __CLIENT__: true,
+      __SERVER__: false,
+      __DEVELOPMENT__: false,
+      __DEVTOOLS__: false,
     }),
   ],
   module: {
