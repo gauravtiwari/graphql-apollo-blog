@@ -1,8 +1,11 @@
-<%= react_component('PostsIndexComponent', {
+<% posts = {
     posts: Post.all.limit(20).map{|post| {
       id: post.id,
       title: post.title,
       body: post.body
     }}
-  }.to_json, {tag: "article"})
+  }.to_json
+%>
+
+<%= react_component('PostsIndexComponent', posts, {tag: "article", prerender: true})
 %>
