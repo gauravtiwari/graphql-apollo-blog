@@ -1,6 +1,7 @@
 import React from 'react';
 import PostsQuery from './postsQuery';
 import { connect } from 'react-apollo';
+import serialize from 'serialize-javascript';
 
 import { ListItem, List } from 'material-ui/List';
 import Divider from 'material-ui/Divider';
@@ -33,7 +34,9 @@ class PostsIndexComponent extends React.Component {
   }
 
   render() {
-    const { data } = this.props;
+    const { data, store } = this.props;
+    console.log(store);
+    const storeData = store && serialize(store.getState());
     let postList;
 
     if (data.loading) {
@@ -62,6 +65,7 @@ class PostsIndexComponent extends React.Component {
           {postList}
         </List>
         <Divider inset={true} />
+        <script dangerouslySetInnerHTML={{__html: `window.__data=${storeData};`}} charSet="UTF-8"/>
       </div>
     );
   }

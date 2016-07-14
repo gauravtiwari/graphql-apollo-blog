@@ -41,7 +41,7 @@ function mountComponents() {
     // Initialize client with new network interface
     const client = new ApolloClient({
       networkInterface,
-      initialState: window.__APOLLO_CONTEXT__,
+      initialState: props.posts,
     });
 
     const initialState = client.initialState;

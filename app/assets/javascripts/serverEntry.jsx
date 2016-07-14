@@ -9,4 +9,3 @@ import registerComponents from './register';
 
 // Call to register all components
 registerComponents();
-
