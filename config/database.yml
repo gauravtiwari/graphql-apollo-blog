@@ -80,6 +80,4 @@ test:
 #
 production:
   <<: *default
-  database: apollo_on_rails_production
-  username: apollo_on_rails
-  password: <%= ENV['APOLLO_ON_RAILS_DATABASE_PASSWORD'] %>
+  url: <%= ENV['DATABASE_URL'] %>
