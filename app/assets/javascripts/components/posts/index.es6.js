@@ -11,6 +11,34 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import baseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
+const titleStyles = {
+  padding: '0',
+  lineHeight: '1.2',
+  fontSize: '20px',
+  fontWeight: '400',
+};
+
+const contentStyles = {
+  padding: '0',
+  lineHeight: '1.5',
+  fontSize: '18px',
+  fontWeight: '300',
+  color: '#777',
+};
+
+const listItemStyles = {
+  borderBottom: '1px solid #f2f2f2',
+};
+
+const metaStyles = {
+  marginTop: '10px',
+};
+
+const metaItemStyles = {
+  marginRight: '10px',
+  color: darkBlack,
+};
+
 const postsQuery = new PostsQuery({
   first: 20,
 });
@@ -35,7 +63,6 @@ class PostsIndexComponent extends React.Component {
 
   render() {
     const { data, store } = this.props;
-    console.log(store);
     const storeData = store && serialize(store.getState());
     let postList;
 
@@ -44,17 +71,19 @@ class PostsIndexComponent extends React.Component {
     } else {
       postList = data.posts.map((post) => {
       return <ListItem
-              primaryText={post.title}
               key={post.id}
+              style={listItemStyles}
               onClick={this._showPost.bind(this, post.id)}
-              secondaryText={
-              <p>
-              <span style={{color: darkBlack}}>{post.user.name}</span> --
-              {post.body}
-              </p>
-              }
-              secondaryTextLines={2}
-            />;
+            >
+              <h1 style={titleStyles} className="title">{post.title}</h1>
+              <div className="content" style={contentStyles}>
+                {post.excerpt}
+              </div>
+              <div className="meta" style={metaStyles}>
+                <span style={metaItemStyles}>By: {post.user.name}</span>
+                <span className="count" style={metaItemStyles}>Comments: {post.comments_count}</span>
+              </div>
+            </ListItem>;
       });
     }
 

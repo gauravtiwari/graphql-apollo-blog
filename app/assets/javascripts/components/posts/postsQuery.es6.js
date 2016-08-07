@@ -9,7 +9,9 @@ class PostsQuery {
           id,
           title,
           body,
+          excerpt,
           url,
+          comments_count,
           user {
             id,
             name,

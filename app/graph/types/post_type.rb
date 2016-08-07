@@ -1,3 +1,5 @@
+include ActionView::Helpers::TextHelper
+
 PostType = GraphQL::ObjectType.define do
   name 'Post'
   description 'A single post entry returns a post'
@@ -11,6 +13,13 @@ PostType = GraphQL::ObjectType.define do
   field :comments, types[CommentType], 'The comments of this post'
 
   field :comments_count, types.Int, 'The comments of this post'
+
+  field :excerpt do
+    type types.String
+    resolve -> (obj, args, ctx) {
+      truncate(obj.body, length: 250)
+    }
+  end
 
   field :url do
     type types.String

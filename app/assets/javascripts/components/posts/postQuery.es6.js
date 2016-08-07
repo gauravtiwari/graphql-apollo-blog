@@ -10,6 +10,8 @@ class postQuery {
             title,
             body,
             url,
+            excerpt,
+            comments_count,
             comments {
             id,
             body,
