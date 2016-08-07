@@ -28,10 +28,9 @@ gem 'will_paginate'
 
 # Graphql
 gem 'graphql'
-gem 'graphql-relay'
 
 # Authentication
-gem 'devise', '4.0.0.rc2'
+gem 'devise'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

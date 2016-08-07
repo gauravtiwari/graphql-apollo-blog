@@ -88,7 +88,8 @@ CREATE TABLE posts (
     body text,
     user_id integer,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    comments_count integer
 );
 
 
@@ -237,6 +238,13 @@ CREATE INDEX index_comments_on_user_id ON comments USING btree (user_id);
 
 
 --
+-- Name: index_posts_on_comments_count; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_posts_on_comments_count ON posts USING btree (comments_count);
+
+
+--
 -- Name: index_posts_on_user_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -287,6 +295,6 @@ ALTER TABLE ONLY posts
 
 SET search_path TO "$user", public;
 
-INSERT INTO schema_migrations (version) VALUES ('20160414074114'), ('20160414074300'), ('20160702142845');
+INSERT INTO schema_migrations (version) VALUES ('20160414074114'), ('20160414074300'), ('20160702142845'), ('20160807091244');
 
 

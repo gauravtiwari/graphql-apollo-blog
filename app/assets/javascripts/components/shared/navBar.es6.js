@@ -8,6 +8,10 @@ import baseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
 
+const titleStyle = {
+  cursor: 'pointer',
+};
+
 class NavBarComponent extends React.Component {
   constructor(props) {
     super(props);
@@ -33,7 +37,10 @@ class NavBarComponent extends React.Component {
       <MuiThemeProvider muiTheme={getMuiTheme(lightBaseTheme)}>
         <div className="nav">
           <AppBar
+            className="navbar"
             title="ApolloRails"
+            titleStyle={titleStyle}
+            onTitleTouchTap={() => Turbolinks.visit('/')}
             iconElementRight={
               <FlatButton
                 label={text}

@@ -10,6 +10,8 @@ PostType = GraphQL::ObjectType.define do
   field :user, UserType, 'Owner of this post'
   field :comments, types[CommentType], 'The comments of this post'
 
+  field :comments_count, types.Int, 'The comments of this post'
+
   field :url do
     type types.String
     resolve -> (obj, args, ctx) {
