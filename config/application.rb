@@ -18,8 +18,8 @@ Bundler.require(*Rails.groups)
 
 module ApolloOnRails
   class Application < Rails::Application
-    config.autoload_paths << Rails.root.join('app/graph')
-    config.autoload_paths << Rails.root.join('app/graph/types')
+    config.autoload_paths << Rails.root.join('app/api')
+    config.autoload_paths << Rails.root.join('app/api/types')
     config.active_record.raise_in_transactional_callbacks = true
 
     # Do not swallow errors in after_commit/after_rollback callbacks.

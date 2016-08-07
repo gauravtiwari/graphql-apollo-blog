@@ -90,6 +90,7 @@ class PostsIndexComponent extends React.Component {
     return(
       <div className="postsList">
         <h1>List of Posts</h1>
+        <hr/>
         <List>
           {postList}
         </List>
