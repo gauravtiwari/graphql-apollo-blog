@@ -12,6 +12,7 @@ const titleStyle = {
   cursor: 'pointer',
 };
 
+
 class NavBarComponent extends React.Component {
   constructor(props) {
     super(props);
