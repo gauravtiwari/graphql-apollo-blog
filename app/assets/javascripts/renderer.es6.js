@@ -8,7 +8,7 @@ import ReactDOM from 'react-dom';
 import $ from 'jquery';
 import App from './helpers/app';
 import createReactElement from './utils/createReactElement';
-import networkInterface from './setNetworkLayer.es6.js';
+import networkInterface from './setNetworkLayer';
 
 // Apollo client
 import ApolloClient, { createNetworkInterface } from 'apollo-client';
