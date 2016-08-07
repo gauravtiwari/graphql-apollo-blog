@@ -11,9 +11,6 @@ namespace :assets do
   desc 'Compile assets with webpack'
   task :webpack do
     sh 'npm run build:client'
-
-    # For Server rendering
-    sh 'npm run build:server'
   end
 
   task :clobber do
