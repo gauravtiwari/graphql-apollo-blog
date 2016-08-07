@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "build:dev:client": "node_modules/webpack/bin/webpack.js -w --config webpack.client.config.js",
-    "build:dev:server": "node_modules/webpack/bin/webpack.js -w --config webpack.server.config.js"
+    "build:client": "node_modules/webpack/bin/webpack.js --config webpack.client.config.js -p",
+    "build:dev:server": "node_modules/webpack/bin/webpack.js -w --config webpack.server.config.js",
+    "build:server": "node_modules/webpack/bin/webpack.js --config webpack.server.config.js -p"
   },
   "repository": {
     "type": "git",
