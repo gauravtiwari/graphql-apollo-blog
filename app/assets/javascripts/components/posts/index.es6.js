@@ -1,15 +1,18 @@
 import React from 'react';
 import PostsQuery from './postsQuery';
-import { connect } from 'react-apollo';
-import serialize from 'serialize-javascript';
+import { graphql } from 'react-apollo';
 
 import { ListItem, List } from 'material-ui/List';
 import Divider from 'material-ui/Divider';
 import { darkBlack } from 'material-ui/styles/colors';
 
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import baseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
+
+import Turbolinks from 'turbolinks';
+
+import App from '../../helpers/app.es6.js';
+const AppInstance = new App;
 
 const titleStyles = {
   padding: '0',
@@ -39,55 +42,79 @@ const metaItemStyles = {
   color: darkBlack,
 };
 
-const postsQuery = new PostsQuery({
-  first: 20,
-});
-
 class PostsIndexComponent extends React.Component {
   constructor(props) {
     super(props);
+    this.loadMore = this.loadMore.bind(this);
     this.state = {
       loading: false,
+      page: 0,
+      start: 0,
+      fetching: false,
     };
   }
 
   getChildContext() {
     return {
-      muiTheme: getMuiTheme(baseTheme)
+      muiTheme: getMuiTheme(baseTheme),
     };
   }
 
+  componentDidMount() {
+    window.addEventListener('scroll', this.loadMore);
+  }
+
   _showPost(id) {
-    Turbolinks.visit("/posts/" + id);
+    Turbolinks.visit(`/posts/${id}`);
+  }
+
+  loadMore() {
+    if (AppInstance.scrolledToBottom() && !this.props.data.loading) {
+      this.props.data.fetchMore({
+        variables: { start: this.props.data.variables.start + 20 },
+        updateQuery: (oldProps, { newProps }) => {
+          const newPosts = newProps.data.posts;
+          return {
+            posts: [...oldProps.posts, ...newPosts],
+          };
+        },
+      });
+    }
   }
 
   render() {
-    const { data, store } = this.props;
-    const storeData = store && serialize(store.getState());
+    const { data } = this.props;
     let postList;
 
     if (data.loading) {
-      postList = "Loading...";
+      postList = 'Loading...';
     } else {
       postList = data.posts.map((post) => {
-      return <ListItem
-              key={post.id}
-              style={listItemStyles}
-              onClick={this._showPost.bind(this, post.id)}
-            >
-              <h1 style={titleStyles} className="title">{post.title}</h1>
-              <div className="content" style={contentStyles}>
-                {post.excerpt}
-              </div>
-              <div className="meta" style={metaStyles}>
-                <span style={metaItemStyles}>By: {post.user.name}</span>
-                <span className="count" style={metaItemStyles}>Comments: {post.comments_count}</span>
-              </div>
-            </ListItem>;
+        return (
+          <ListItem
+            key={post.id}
+            style={listItemStyles}
+            onClick={this._showPost.bind(this, post.id)}
+          >
+            <h1 style={titleStyles} className="title">{post.title}</h1>
+            <div className="content" style={contentStyles}>
+              {post.excerpt}
+            </div>
+            <div className="meta" style={metaStyles}>
+              <span style={metaItemStyles}>By: {post.user.name}</span>
+              <span
+                className="count"
+                style={metaItemStyles}
+              >
+                Comments: {post.comments_count}
+              </span>
+            </div>
+          </ListItem>
+        );
       });
     }
 
-    return(
+    return (
       <div className="postsList">
         <h1>List of Posts</h1>
         <hr/>
@@ -95,7 +122,6 @@ class PostsIndexComponent extends React.Component {
           {postList}
         </List>
         <Divider inset={true} />
-        <script dangerouslySetInnerHTML={{__html: `window.__data=${storeData};`}} charSet="UTF-8"/>
       </div>
     );
   }
@@ -105,15 +131,17 @@ PostsIndexComponent.childContextTypes = {
   muiTheme: React.PropTypes.object.isRequired,
 };
 
-
-function mapQueriesToProps({ ownProps, state }) {
-  return {
-    data: postsQuery,
-  };
+PostsIndexComponent.propTypes = {
+  data: React.PropTypes.object.isRequired,
 };
 
-const PostsWithData = connect({
-  mapQueriesToProps,
+const PostsWithData = graphql(PostsQuery, {
+  options: () => ({
+    variables: {
+      first: 20,
+      start: 0,
+    },
+  }),
 })(PostsIndexComponent);
 
 export default PostsWithData;

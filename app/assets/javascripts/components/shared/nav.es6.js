@@ -1,12 +1,15 @@
 import React from 'react';
-import { connect } from 'react-apollo';
+import { graphql } from 'react-apollo';
+
 import AppBar from 'material-ui/AppBar';
 import FlatButton from 'material-ui/FlatButton';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import currentUserQuery from '../posts/currentUserQuery';
+import CurrentUserQuery from '../posts/currentUserQuery';
 import baseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
+
+import Turbolinks from 'turbolinks';
 
 const titleStyle = {
   cursor: 'pointer',
@@ -33,7 +36,7 @@ class NavBarComponent extends React.Component {
 
     const method = loggedIn ? 'DELETE' : 'GET';
 
-    return(
+    return (
       <MuiThemeProvider muiTheme={getMuiTheme(lightBaseTheme)}>
         <div className="nav">
           <AppBar
@@ -59,14 +62,6 @@ NavBarComponent.childContextTypes = {
   muiTheme: React.PropTypes.object.isRequired,
 };
 
-function mapQueriesToProps({ ownProps, state }) {
-  return {
-    data: new currentUserQuery(),
-  };
-};
-
-const NavBarWithData = connect({
-  mapQueriesToProps,
-})(NavBarComponent);
+const NavBarWithData = graphql(CurrentUserQuery)(NavBarComponent);
 
 export default NavBarWithData;

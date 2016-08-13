@@ -1,31 +1,19 @@
 import gql from 'graphql-tag';
 
-class PostsQuery {
-  constructor(variables) {
-    const query = {
-    query: gql`
-      query getPosts($first: Int!) {
-        posts(first: $first) {
-          id,
-          title,
-          body,
-          excerpt,
-          url,
-          comments_count,
-          user {
-            id,
-            name,
-            email,
-          }
-        }
-      }
-      `,
-      variables: variables,
-      forceFetch: false,
-      returnPartialData: false,
-    };
-    return query;
+const PostsQuery = gql` query getPosts($first: Int!, $start: Int!) {
+  posts(first: $first, start: $start) {
+    id,
+    title,
+    body,
+    excerpt,
+    url,
+    comments_count,
+    user {
+      id,
+      name,
+      email,
+    }
   }
-}
+}`;
 
 export default PostsQuery;
