@@ -6,18 +6,15 @@ QueryType = GraphQL::ObjectType.define do
     type types[PostType]
     description 'Post collections'
     argument :first, !types.Int
-    resolve -> (object, arguments, context) {
-      @posts = Post.all.eager_load(:user).limit(arguments['first'])
-    }
+    argument :start, !types.Int
+    resolve -> (object, arguments, context) { resolve_posts(arguments) }
   end
 
   field :post do
     type PostType
     description 'Find a Post by id'
     argument :id, !types.ID
-    resolve -> (object, arguments, context) {
-      Post.eager_load(:user, { comments: :user }).find(arguments['id'])
-    }
+    resolve -> (object, arguments, context) { resolve_post(arguments) }
   end
 
   field :current_user do
@@ -27,4 +24,14 @@ QueryType = GraphQL::ObjectType.define do
       context[:current_user] ? context[:current_user] : nil
     }
   end
+end
+
+def resolve_post(arguments)
+  Post.eager_load(
+    :user, { comments: :user }
+  ).find(arguments['id'])
+end
+
+def resolve_posts(arguments)
+  Post.eager_load(:user).offset(arguments['start']).limit(arguments['first'])
 end
