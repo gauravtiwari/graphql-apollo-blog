@@ -47,7 +47,7 @@
     "loader-utils": "^0.2.15",
     "material-ui": "^0.15.4",
     "react": "^15.3.0",
-    "react-apollo": "^0.3.21",
+    "react-apollo": "^0.4.1",
     "react-dom": "^15.3.0",
     "react-tap-event-plugin": "^1.0.0",
     "redux": "^3.5.2",
