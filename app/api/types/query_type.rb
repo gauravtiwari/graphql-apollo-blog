@@ -5,9 +5,14 @@ QueryType = GraphQL::ObjectType.define do
   field :posts do
     type types[PostType]
     description 'Post collections'
-    argument :first, !types.Int
-    argument :start, !types.Int
+    argument :page, !types.Int
     resolve -> (object, arguments, context) { resolve_posts(arguments) }
+  end
+
+  field :posts_count do
+    type types.Int
+    description 'Return number of posts'
+    resolve -> (object, arguments, context) { Post.count }
   end
 
   field :post do
@@ -33,5 +38,7 @@ def resolve_post(arguments)
 end
 
 def resolve_posts(arguments)
-  Post.eager_load(:user).offset(arguments['start']).limit(arguments['first'])
+  Post.eager_load(:user).paginate(
+    page: arguments['page'], per_page: 20
+  ).order(id: :desc)
 end

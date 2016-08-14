@@ -1,7 +1,8 @@
 import gql from 'graphql-tag';
 
-const PostsQuery = gql` query getPosts($first: Int!, $start: Int!) {
-  posts(first: $first, start: $start) {
+const PostsQuery = gql` query getPosts($page: Int!) {
+  posts_count,
+  posts(page: $page) {
     id,
     title,
     body,

@@ -48,8 +48,7 @@ class PostsIndexComponent extends React.Component {
     this.loadMore = this.loadMore.bind(this);
     this.state = {
       loading: false,
-      page: 0,
-      start: 0,
+      page: 1,
       fetching: false,
     };
   }
@@ -69,15 +68,19 @@ class PostsIndexComponent extends React.Component {
   }
 
   loadMore() {
-    if (AppInstance.scrolledToBottom() && !this.props.data.loading) {
-      this.props.data.fetchMore({
-        variables: { start: this.props.data.variables.start + 20 },
-        updateQuery: (oldProps, { newProps }) => {
-          const newPosts = newProps.data.posts;
-          return {
-            posts: [...oldProps.posts, ...newPosts],
-          };
-        },
+    if (AppInstance.scrolledToBottom() && !this.props.data.loading && this.props.data.posts_count > (this.state.page * 20)) {
+      this.setState({
+        page: this.state.page + 1,
+      }, () => {
+        this.props.data.fetchMore({
+          variables: { page: this.state.page },
+          updateQuery: (previousResult, { fetchMoreResult }) => {
+            const newPosts = fetchMoreResult.data.posts;
+            return {
+              posts: [...previousResult.posts, ...newPosts],
+            };
+          },
+        });
       });
     }
   }
@@ -85,10 +88,7 @@ class PostsIndexComponent extends React.Component {
   render() {
     const { data } = this.props;
     let postList;
-
-    if (data.loading) {
-      postList = 'Loading...';
-    } else {
+    if (!data.loading) {
       postList = data.posts.map((post) => {
         return (
           <ListItem
@@ -138,8 +138,7 @@ PostsIndexComponent.propTypes = {
 const PostsWithData = graphql(PostsQuery, {
   options: () => ({
     variables: {
-      first: 20,
-      start: 0,
+      page: 1,
     },
   }),
 })(PostsIndexComponent);
