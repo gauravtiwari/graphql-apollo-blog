@@ -9,10 +9,10 @@ QueryType = GraphQL::ObjectType.define do
     resolve -> (object, arguments, context) { resolve_posts(arguments) }
   end
 
-  field :posts_count do
+  field :total_pages do
     type types.Int
     description 'Return number of posts'
-    resolve -> (object, arguments, context) { Post.count }
+    resolve -> (object, arguments, context) { Post.paginate(per_page: 20, page: 1).total_pages }
   end
 
   field :post do
