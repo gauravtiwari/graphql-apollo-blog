@@ -48,7 +48,6 @@ class PostsIndexComponent extends React.Component {
     this.loadMore = this.loadMore.bind(this);
     this.state = {
       loading: false,
-      page: 1,
       fetching: false,
     };
   }
@@ -68,19 +67,17 @@ class PostsIndexComponent extends React.Component {
   }
 
   loadMore() {
-    if (AppInstance.scrolledToBottom() && !this.props.data.loading && this.props.data.posts_count > (this.state.page * 20)) {
-      this.setState({
-        page: this.state.page + 1,
-      }, () => {
-        this.props.data.fetchMore({
-          variables: { page: this.state.page },
-          updateQuery: (previousResult, { fetchMoreResult }) => {
-            const newPosts = fetchMoreResult.data.posts;
-            return {
-              posts: [...previousResult.posts, ...newPosts],
-            };
-          },
-        });
+    console.log(this.props.data.variables.page);
+    if (AppInstance.scrolledToBottom() && !this.props.data.loading && (this.props.data.total_pages >= this.props.data.variables.page)) {
+      this.props.data.fetchMore({
+        variables: { page: this.props.data.variables.page + 1 },
+        updateQuery: (previousResult, { fetchMoreResult }) => {
+          const newPosts = fetchMoreResult.data.posts;
+          return {
+            total_pages: previousResult.total_pages,
+            posts: [...previousResult.posts, ...newPosts],
+          };
+        },
       });
     }
   }

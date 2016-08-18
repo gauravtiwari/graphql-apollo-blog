@@ -1,7 +1,7 @@
 import gql from 'graphql-tag';
 
 const PostsQuery = gql` query getPosts($page: Int!) {
-  posts_count,
+  total_pages,
   posts(page: $page) {
     id,
     title,
